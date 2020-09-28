@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.appline.sberbank.tests</groupId>
-    <artifactId>HomeWork3CucumberTest</artifactId>
+    <artifactId>HomeWork3OnlyCucumberTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -21,10 +21,10 @@
 
         <!-- Dependencies Version -->
         <selenium-java.version>3.141.59</selenium-java.version>
+        <junit.version>4.13</junit.version>
+        <allure.version>2.13.5</allure.version>
+        <cucumber.version>5.7.0</cucumber.version>
         <aspectj.version>1.8.10</aspectj.version>
-        <allure-cucumber-jvm.version>2.13.5</allure-cucumber-jvm.version>
-        <cucumber-java.version>6.6.0</cucumber-java.version>
-        <cucumber-junit.version>6.6.0</cucumber-junit.version>
     </properties>
 
     <dependencies>
@@ -36,40 +36,30 @@
             <version>${selenium-java.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber5-jvm -->
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber-java.version}</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>${allure.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber-junit.version}</version>
+            <version>${cucumber.version}</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber4-jvm -->
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber4-jvm</artifactId>
-            <version>${allure-cucumber-jvm.version}</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit4</artifactId>
-            <version>2.13.5</version>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -87,22 +77,17 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>**/CucumberRunner.java</includes>
+                    <includes>
+                        <include>**/CucumberRunner.java</include>
+                    </includes>
                     <argLine>
                         -Xmx1024m
                         -Dfile.encoding=${encoding.type}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
                     </argLine>
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
                     </systemPropertyVariables>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>ru.appline.frameworks.sberbank.utils.MyAllureListener</value>
-                        </property>
-                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
