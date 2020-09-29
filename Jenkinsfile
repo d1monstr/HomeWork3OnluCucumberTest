@@ -1,11 +1,6 @@
 pipeline{
     agent any
     stages{
-        stage('Git'){
-            steps{
-                git branch: '${BRANCH}', url: 'https://github.com/d1monstr/HomeWork3OnlyCucumberTest'
-            }
-        }
         stage('Run Tests'){
             steps{
                 withMaven(maven: 'mvn_3.6.3') {
