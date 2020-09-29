@@ -9,8 +9,7 @@ pipeline{
         stage('Run Tests'){
             steps{
                 withMaven(maven: 'mvn_3.6.3') {
-                    sh "chmod 777 -R src/main/resources/webdrivers"
-                    sh "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
+                    bat "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
                 }
             }
         }
