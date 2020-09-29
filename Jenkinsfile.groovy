@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Run Tests'){
             steps{
-                withMaven(maven: 'maven_3.5.2'){
+                withMaven(maven: 'maven_3.6.3'){
                     bat "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
                 }
             }
@@ -12,7 +12,7 @@ pipeline{
             steps{
                 allure includeProperties: false,
                 jdk: '',
-                results: [[path: 'target/allure-results']]
+                results: [[path: 'target/reports/allure-results']]
             }
         }
     }
