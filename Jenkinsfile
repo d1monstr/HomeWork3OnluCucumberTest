@@ -3,8 +3,9 @@ pipeline{
     stages{
         stage('Run Tests'){
             steps{
-                withMaven(maven: 'maven_3.6.3'){
-                    bat "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
+                withMaven(maven: 'Maven3') {
+                    sh "chmod 777 -R src/main/resources/drivers"
+                    sh "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
                 }
             }
         }
@@ -16,8 +17,8 @@ pipeline{
             }
         }
     }
-    post{
-        always{
+    post {
+        always {
             cleanWs notFailBuild: true
         }
     }
