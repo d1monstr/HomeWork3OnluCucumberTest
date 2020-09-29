@@ -1,9 +1,14 @@
 pipeline{
     agent any
     stages{
+        stage('Git'){
+            steps{
+                git branch: '${BRANCH}', url: 'https://github.com/d1monstr/HomeWork3OnlyCucumberTest'
+            }
+        }
         stage('Run Tests'){
             steps{
-                withMaven(maven: 'Maven3') {
+                withMaven(maven: 'apache-maven-3.6.3') {
                     sh "chmod 777 -R src/main/resources/drivers"
                     sh "mvn clean test -Dcucumber.filter.tags='${TAGS}'"
                 }
