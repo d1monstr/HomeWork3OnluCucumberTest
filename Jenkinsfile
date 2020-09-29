@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Git'){
             steps{
-                git branch: ${BRANCH}, url: 'https://github.com/d1monstr/HomeWork3OnlyCucumberTest'
+                git branch: '${BRANCH}', url: 'https://github.com/d1monstr/HomeWork3OnlyCucumberTest'
             }
         }
         stage('Run Tests'){
